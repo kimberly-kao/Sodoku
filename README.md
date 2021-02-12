@@ -1,2 +1,2 @@
-# Sodoku
-Sodoku application using graph map coloring
+# Sudoku
+Sudoku application using graph map coloring
