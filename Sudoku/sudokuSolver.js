@@ -1,5 +1,6 @@
 const b = null
 
+//test cases
 const bd1 = [
     [2, b, b, 9, b, b, 8, b, b],
     [b, b, b, b, b, b, b, b, b],
@@ -48,6 +49,11 @@ const bd4 = [
     [b, b, b, b, b, b, b, b, 1],
 ]
 
+/**
+ * functions solves the board
+ * @param board is the board that needs to be solved
+ * @returns the solved board
+ * */
 function solve(board){
     if(solved(board)){
         return board
@@ -59,6 +65,11 @@ function solve(board){
     }
 }
 
+/**
+ * 
+ * @param {*} boards takes in the board that needs to be solved
+ * @returns false if board solution is not possible
+ */
 function searchForSolution(boards){
     if(boards.length < 1){
         return false
@@ -76,9 +87,11 @@ function searchForSolution(boards){
     }
 }
 
+//checks if board is populated with numbers
 function solved(board){
     for(var i=0; i < 9; i++){
         for(var j = 0; j<9; j++){
+            //if there is a square with nothing, the board is not solved
             if(board[i][j] == null){
                 return false
             }
@@ -87,11 +100,13 @@ function solved(board){
     return true
 }
 
+
 function nextBoards(board){
     var res = []
+    //finds the first empty square
     const firstEmpty = findEmptySquare(board) //<--(y, x)
     if(firstEmpty != undefined){
-        const y = firstEmpty[0]
+        const y = firstEmpty[0] 
         const x = firstEmpty[1]
         for(var i = 1; i<=9; i++){
             var newBoard = [...board] //to tell javaScript we don't want to have a bunch of boards that point to the exact same board
@@ -104,6 +119,7 @@ function nextBoards(board){
     return res
 }
 
+//finds first empty square
 function findEmptySquare(board){
     // board -> [Int, Int]
     for(var i= 0; i<9; i++){
@@ -115,23 +131,27 @@ function findEmptySquare(board){
     }
 }
 
-//filtering funciton
+//filtering function
 function keepOnlyValid(boards){
     return boards.filter(b => validBoard(b))
 }
 
+//
 function validBoard(board){
     return rowGood(board) && columnGood(board) && boxesGood(board)
 }
 
+// makes sure that the board does not have any null characters in a row
 function rowGood(board){
     for(var i = 0; i<9; i++){
         var cur = []
         for(var j = 0; j<9; j++){
+            // determines whether a string contains the characters of a specified string
             if(cur.includes(board[i][j])){
                 return false
             }
             else if(board[i][j] != null){
+                //pushes new item to end of array
                 cur.push(board[i][j])
             }
         }
@@ -140,6 +160,7 @@ function rowGood(board){
 }
 
 //traversing up and down
+//makes sure that the board does not contain any null characters in a column
 function columnGood(board){
     for(var i = 0; i<9; i++){
         var cur = []
@@ -154,6 +175,7 @@ function columnGood(board){
     }
     return true
 }
+
 
 function boxesGood(board){
     const boxCoordinates = [
