@@ -87,7 +87,11 @@ function searchForSolution(boards){
     }
 }
 
-//checks if board is populated with numbers
+/** checks if board is populated with numbers
+ *
+ * @param board: board that needs to be solved
+ * @returns true if the board is solved, false if the board is not 
+ */
 function solved(board){
     for(var i=0; i < 9; i++){
         for(var j = 0; j<9; j++){
@@ -100,7 +104,11 @@ function solved(board){
     return true
 }
 
-
+/**
+ * 
+ * @param {*} board the board that needs to be solved
+ * @returns the possible boards
+ */
 function nextBoards(board){
     var res = []
     //finds the first empty square
@@ -119,7 +127,11 @@ function nextBoards(board){
     return res
 }
 
-//finds first empty square
+/** finds the first empty square
+ * 
+ * @param {*} board is the board that needs to be solved
+ * @returns the first empty square
+ */
 function findEmptySquare(board){
     // board -> [Int, Int]
     for(var i= 0; i<9; i++){
@@ -131,17 +143,32 @@ function findEmptySquare(board){
     }
 }
 
-//filtering function
+/**
+ * 
+ * @param {*} boards the board that needs to be solved
+ * @returns the valid boards (filters out all the invalid solutions)
+ * 
+ */
 function keepOnlyValid(boards){
+    // filters through and takes only the valid board (the boards that return true)
     return boards.filter(b => validBoard(b))
 }
 
-//
+/**
+ * checks if the board is valid
+ * @param {*} board the board that needs to be solved
+ * @returns if true if the solution is valid, false if the solution is not
+ */
 function validBoard(board){
     return rowGood(board) && columnGood(board) && boxesGood(board)
 }
 
-// makes sure that the board does not have any null characters in a row
+/**
+ * makes sure that the board does not have any same numbers in a row
+ * @param {*} board the board that needs to be solved
+ * @returns true if the row does not have the same number in the row, false if it does
+ * 
+ */
 function rowGood(board){
     for(var i = 0; i<9; i++){
         var cur = []
@@ -159,8 +186,13 @@ function rowGood(board){
     return true
 }
 
-//traversing up and down
-//makes sure that the board does not contain any null characters in a column
+/**
+ * traversing up and down
+ * makes sure that the board does not contain any of the same numbers in a column
+ * @param {*} board the board that needs to be solved
+ * @returns true if the board does not have any repeating numbers in the columnm, false if it does
+ * 
+ */
 function columnGood(board){
     for(var i = 0; i<9; i++){
         var cur = []
@@ -176,7 +208,12 @@ function columnGood(board){
     return true
 }
 
-
+/** makes sure that the 3x3 boxes don't have the same numbers
+ * 
+ * @param board the board that needs to be solved
+ * @return true if the board does not have any repeating numbers in the box, false if it does
+ * 
+ */ 
 function boxesGood(board){
     const boxCoordinates = [
         [0, 0], [0, 1], [0, 2],
